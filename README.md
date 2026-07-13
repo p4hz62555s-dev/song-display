@@ -21,7 +21,6 @@ LCD SDA → GPIO21
 LCD SCL → GPIO22
 LED → GPIO2
 
-
 Made by RA_TECH
 
 Instagram:
