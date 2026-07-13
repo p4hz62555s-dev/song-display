@@ -1,0 +1,92 @@
+#include <Wire.h>
+#include <LiquidCrystal_I2C.h>
+
+LiquidCrystal_I2C lcd(0x27, 16, 2);
+
+#define LED_PIN 2
+
+void typeText(String line1, String line2)
+{
+  lcd.clear();
+
+  int col1 = (16 - line1.length()) / 2;
+  int col2 = (16 - line2.length()) / 2;
+
+  if (col1 < 0) col1 = 0;
+  if (col2 < 0) col2 = 0;
+
+  lcd.setCursor(col1, 0);
+
+  for (int i = 0; i < line1.length(); i++)
+  {
+    lcd.print(line1[i]);
+
+    digitalWrite(LED_PIN, HIGH);
+    delay(60);
+    digitalWrite(LED_PIN, LOW);
+    delay(40);
+  }
+
+  lcd.setCursor(col2, 1);
+
+  for (int i = 0; i < line2.length(); i++)
+  {
+    lcd.print(line2[i]);
+
+    digitalWrite(LED_PIN, HIGH);
+    delay(60);
+    digitalWrite(LED_PIN, LOW);
+    delay(40);
+  }
+
+  delay(1800);
+}
+
+void followScreen()
+{
+  lcd.clear();
+
+  lcd.setCursor(0,0);
+  lcd.print("FOLLOW RA TECH");
+
+  lcd.setCursor(4,1);
+  lcd.print("FOR MORE");
+
+  for(int i=0;i<15;i++)
+  {
+    digitalWrite(LED_PIN,HIGH);
+    delay(100);
+    digitalWrite(LED_PIN,LOW);
+    delay(100);
+  }
+
+  delay(3500);
+}
+
+void setup()
+{
+  pinMode(LED_PIN,OUTPUT);
+  digitalWrite(LED_PIN,LOW);
+
+  lcd.init();
+  lcd.backlight();
+}
+
+void loop()
+{
+  typeText("Initializing", "System");
+  typeText("Loading", "Memories");
+  typeText("Searching", "...");
+  typeText("Connection", "Lost");
+  typeText("No", "Response");
+  typeText("Still", "Waiting");
+  typeText("Moving", "On...");
+  typeText("Goodbye", ":)");
+
+  followScreen();
+}
+
+
+
+
+we have changed the song lyrics due to copyright issue , you can custamize the text accorgingly inside loop
